@@ -48,30 +48,32 @@ public class GrabAndThrow : MonoBehaviour
             var interactorObject = _interactor.transform.GetComponent<XRController>();
             if (interactorObject != null)
             {
-                // Получаем скорость и угловую скорость контроллера
+                // Получаем скорость контроллера
                 var velocity = interactorObject.inputDevice.TryGetFeatureValue(UnityEngine.XR.CommonUsages.deviceVelocity, out var deviceVelocity)
                     ? deviceVelocity
                     : Vector3.zero;
 
-                var angularVelocity = interactorObject.inputDevice.TryGetFeatureValue(UnityEngine.XR.CommonUsages.deviceAngularVelocity, out var deviceAngularVelocity)
-                    ? deviceAngularVelocity
-                    : Vector3.zero;
-
-                // Динамическая настройка множителя в зависимости от скорости контроллера
+                // Динамическая настройка множителя
                 float speedMagnitude = velocity.magnitude; // Сила движения контроллера
 
                 // Ограничиваем максимальную скорость броска, чтобы не получить слишком сильный бросок
-                float maxThrowSpeed = 5f; // Уменьшаем максимальную скорость броска
-                float throwMultiplier = Mathf.Clamp(speedMagnitude * 0.05f, 0.1f, 0.5f); // Сильное уменьшение множителя
+                float maxThrowSpeed = 3f; // Максимальная скорость броска
+                float throwMultiplier = Mathf.Clamp(speedMagnitude * 0.03f, 0.1f, 0.3f); // Множитель для уменьшения скорости
 
-                // Применяем динамическую скорость, ограниченную максимальной
-                _rigidbody.velocity = Vector3.ClampMagnitude(velocity * throwMultiplier, maxThrowSpeed);
-                _rigidbody.angularVelocity = angularVelocity * throwMultiplier;
-
-                // Убедимся, что камень летит в правильном направлении, ориентируясь на контроллер
-                // Мы передаем вектор скорости в направлении контроллера
+                // Используем только направление контроллера, чтобы исключить отклонения
                 Vector3 throwDirection = _interactor.transform.forward; // Направление контроллера
+
+                // Если кинуть ровно вверх, то "forward" будет всё равно направлен немного по горизонтали, это можно компенсировать
+                if (Mathf.Abs(velocity.y) > 0.1f)  // Если есть вертикальная скорость
+                {
+                    throwDirection = Vector3.up; // Если бросок вверх, корректируем направление
+                }
+
+                // Применяем скорость броска с ограничениями
                 _rigidbody.velocity = throwDirection * velocity.magnitude * throwMultiplier;
+
+                // Ограничиваем скорость
+                _rigidbody.velocity = Vector3.ClampMagnitude(_rigidbody.velocity, maxThrowSpeed);
             }
         }
 
