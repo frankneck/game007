@@ -38,6 +38,8 @@ public class GrabAndThrow : MonoBehaviour
             isGrabbed = true;
             _rigidbody.isKinematic = true;
             _rigidbody.useGravity = false;
+            _rigidbody.velocity = Vector3.zero; // Сбрасываем скорость при захвате
+            _rigidbody.angularVelocity = Vector3.zero; // Сбрасываем угловую скорость
             InitializeHistory();
         }
     }
