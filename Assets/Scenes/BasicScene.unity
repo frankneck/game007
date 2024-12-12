@@ -539,12 +539,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 444093aaae007734c8ea0c059f707691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smoothSpeed: 20
-  objectMass: 5
-  throwForceMultiplier: 1
-  maxThrowSpeed: 5
-  minThrowSpeed: 1
-  dragCoefficient: 0.5
 --- !u!114 &642085401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1460,12 +1454,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 444093aaae007734c8ea0c059f707691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smoothSpeed: 20
-  objectMass: 5
-  throwForceMultiplier: 1
-  maxThrowSpeed: 5
-  minThrowSpeed: 1
-  dragCoefficient: 0.5
 --- !u!1 &1460056754 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3428947474597435797, guid: 9af7bc1de85fada4490857335cb4b727, type: 3}
@@ -1483,12 +1471,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 444093aaae007734c8ea0c059f707691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smoothSpeed: 20
-  objectMass: 5
-  throwForceMultiplier: 1
-  maxThrowSpeed: 5
-  minThrowSpeed: 1
-  dragCoefficient: 0.5
 --- !u!114 &1460056756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1787,12 +1769,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 444093aaae007734c8ea0c059f707691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smoothSpeed: 20
-  objectMass: 5
-  throwForceMultiplier: 1
-  maxThrowSpeed: 5
-  minThrowSpeed: 1
-  dragCoefficient: 0.5
 --- !u!114 &2063021672
 MonoBehaviour:
   m_ObjectHideFlags: 0
