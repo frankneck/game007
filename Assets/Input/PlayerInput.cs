@@ -15,10 +15,10 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public partial class PlayerInput: IInputActionCollection2, IDisposable
+public partial class @PlayerInput: IInputActionCollection2, IDisposable
 {
     public InputActionAsset asset { get; }
-    public PlayerInput()
+    public @PlayerInput()
     {
         asset = InputActionAsset.FromJson(@"{
     ""name"": ""PlayerInput"",
@@ -782,7 +782,7 @@ public partial class PlayerInput: IInputActionCollection2, IDisposable
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
     }
 
-    ~PlayerInput()
+    ~@PlayerInput()
     {
         UnityEngine.Debug.Assert(!m_OnFoot.enabled, "This will cause a leak and performance issues, PlayerInput.OnFoot.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, PlayerInput.UI.Disable() has not been called.");
@@ -853,8 +853,8 @@ public partial class PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_Interact;
     public struct OnFootActions
     {
-        private PlayerInput m_Wrapper;
-        public OnFootActions(PlayerInput wrapper) { m_Wrapper = wrapper; }
+        private @PlayerInput m_Wrapper;
+        public OnFootActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_OnFoot_Movement;
         public InputAction @Jump => m_Wrapper.m_OnFoot_Jump;
         public InputAction @Look => m_Wrapper.m_OnFoot_Look;
@@ -929,8 +929,8 @@ public partial class PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_TrackedDeviceOrientation;
     public struct UIActions
     {
-        private PlayerInput m_Wrapper;
-        public UIActions(PlayerInput wrapper) { m_Wrapper = wrapper; }
+        private @PlayerInput m_Wrapper;
+        public UIActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Navigate => m_Wrapper.m_UI_Navigate;
         public InputAction @Submit => m_Wrapper.m_UI_Submit;
         public InputAction @Cancel => m_Wrapper.m_UI_Cancel;
