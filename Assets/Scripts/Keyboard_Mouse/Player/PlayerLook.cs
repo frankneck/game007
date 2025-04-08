@@ -1,28 +1,30 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerLook : MonoBehaviour
 {
     public Camera cam;
-    [Header("Sensitivity")]
+    private float xRotation = 0f;
+
+    [Header("Настройка мыши")]
     public float xSensitivity = 30f;
     public float ySensitivity = 30f;
-    private float xRotation = 0f;
+    public bool invertY = false; // if var is false correct
 
     public void ProcessLook(Vector2 input)
     {
         float mouseX = input.x;
         float mouseY = input.y;
-        // Calculate camera rotation for looking up and down
-        xRotation -= (mouseY * Time.deltaTime) * ySensitivity;
+        
+        float finalMouseY = invertY ? mouseY : -mouseY;
+        // calculate camera rotation for looking up and down
+        xRotation += (finalMouseY * Time.deltaTime) * ySensitivity;
         xRotation = Mathf.Clamp(xRotation, -80f, 80f);
-        // Use value
+        // apply this to our camera transform 
         cam.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        // Rotate player to look right and left
-        transform.Rotate(Vector2.up * (mouseX * Time.deltaTime) * xSensitivity);
+        // rotate player to look left and right
+        transform.Rotate(Vector3.up * mouseX * Time.deltaTime * xSensitivity);
     }
-
 }

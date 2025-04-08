@@ -1,42 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-    public PlayerInput.OnFootActions onFoot;
+    public PlayerInput.OnFootActions onFoot; 
     private PlayerInput playerInput;
-    private PlayerMotor motor;
-    private PlayerLook look;
-
-    private void Awake()
+    private PlayerMotor playerMotor; 
+    private PlayerLook playerLook;
+    // Start is called before the first frame update
+    void Awake()
     {
-        playerInput = new PlayerInput();
-        onFoot = playerInput.OnFoot;
-        motor = GetComponent<PlayerMotor>();
-        look = GetComponent<PlayerLook>();
-        onFoot.Jump.performed += ctx => motor.Jump();
+        playerInput = new PlayerInput(); // Создаем в менеджере новый экземпляр
+        onFoot = playerInput.OnFoot; // 
+        playerMotor = GetComponent<PlayerMotor>();
+        playerLook = GetComponent<PlayerLook>();
+        onFoot.Jump.performed += ctx => playerMotor.Jump();
     }
+
+    // Update is called once per frame
     private void FixedUpdate()
     {
-        motor.ProcessMove(onFoot.Movement.ReadValue<Vector2>());
+        // tell the playerMotor to move using the value from our movement action.
+        playerMotor.ProcessMove(onFoot.Movement.ReadValue<Vector2>());
     }
+
     private void LateUpdate()
     {
-        look.ProcessLook(onFoot.Look.ReadValue<Vector2>());
+        playerLook.ProcessLook(onFoot.Look.ReadValue<Vector2>());     
     }
+
     private void OnEnable()
     {
         onFoot.Enable();
     }
+
     private void OnDisable()
     {
         onFoot.Disable();
     }
 }
-
-
-
-

@@ -1,20 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 public abstract class Interactable : MonoBehaviour
 {
-    public string message;
-    // Add or remove a component to this gameObject
-    public bool useEvents;
+    // message displayed to player when looking at an interactable
+    public string promptMessage = "Open door";
 
     public void BaseInteract()
     {
-        if (useEvents)
-            GetComponent<InteractionEvent>().OnInteract.Invoke();
         Interact();
     }
+
     protected virtual void Interact()
     {
-        // overide
+        
     }
 }
