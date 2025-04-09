@@ -4,11 +4,17 @@ using UnityEngine;
 
 public abstract class Interactable : MonoBehaviour
 {
+    public bool useEvents;
     // message displayed to player when looking at an interactable
-    public string promptMessage = "Open door";
+    [SerializeField] public string promptMessage;
 
     public void BaseInteract()
     {
+        if (useEvents)
+        {
+            GetComponent<InteractionEvent>().onInteract.Invoke();
+        }
+
         Interact();
     }
 

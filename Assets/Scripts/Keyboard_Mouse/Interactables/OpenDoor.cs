@@ -4,17 +4,10 @@ using UnityEngine;
 
 public class Doors : Interactable
 {
-    [SerializeField] private Rigidbody rb;
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField] private GameObject door;
 
     protected override void Interact()
     {
-        rb.isKinematic = false;
-        Destroy(this.GetComponent<Doors>());
+        door.GetComponent<Animator>().SetBool("IsOpen", true);
     }
 }
