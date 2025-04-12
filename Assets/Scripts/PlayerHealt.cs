@@ -5,6 +5,7 @@ public class PlayerHealt : MonoBehaviour
 {
     private float health;
     private float lerpTimer;
+    private PlayerUI playerUI;
     public float maxHealth = 100f;
     public float chipSpeed = 2f;
     public Image frontHealthBar;
@@ -14,6 +15,7 @@ public class PlayerHealt : MonoBehaviour
     void Start()
     {
         health = maxHealth;
+        playerUI = GetComponent<PlayerUI>();
     }
 
     // Update is called once per frame
@@ -21,6 +23,7 @@ public class PlayerHealt : MonoBehaviour
     {
         health = Mathf.Clamp(health, 0, maxHealth);
         UpdateHealthUI();
+        playerUI.UpdateHealth(health);
     }
 
     public void UpdateHealthUI() // вызывается каждый кадр

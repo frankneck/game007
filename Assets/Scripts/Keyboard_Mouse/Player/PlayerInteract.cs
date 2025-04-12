@@ -8,6 +8,7 @@ public class PlayerInteract : MonoBehaviour
     private Camera cam;
     private PlayerUI playerUI;
     private InputManager inputManager;
+    private PlayerHealt playerHealthealth;
     [SerializeField] private float distance = 3f;
     [SerializeField] private LayerMask layerMask;
     void Start()
@@ -15,6 +16,7 @@ public class PlayerInteract : MonoBehaviour
         cam = GetComponent<PlayerLook>().cam;
         playerUI = GetComponent<PlayerUI>();
         inputManager = GetComponent<InputManager>();
+        playerHealthealth = GetComponent<PlayerHealt>();
     }
 
     void Update()
