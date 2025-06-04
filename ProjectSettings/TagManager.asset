@@ -9,6 +9,7 @@ TagManager:
   - Projectile
   - Left Hand
   - Right Hand
+  - Storage
   layers:
   - Default
   - TransparentFX
