@@ -39,7 +39,7 @@ public class FireBulletOnActivate : MonoBehaviour
             {
                 StorageDetach();
             }
-            if (right.action.WasPressedThisFrame())
+            else if (right.action.WasPressedThisFrame())
             {
                 StorageDetach();
             }
@@ -88,9 +88,12 @@ public class FireBulletOnActivate : MonoBehaviour
         if (animator != null)
         {
             animator.SetTrigger("RELOADED");
+            Debug.Log("Преждевременная перезарядка");
             storage.SetActive(true);
         }
         currentAmmo = maxAmmo;
+
+        storageDetached = false; // разрешаем снова вытащить магазин
     }
 
     public void StorageDetach()
@@ -106,6 +109,7 @@ public class FireBulletOnActivate : MonoBehaviour
         {
             storage.SetActive(false);
             GameObject newStorage = GameObject.Instantiate(ammo, storageEjectPoint.position, storageEjectPoint.rotation);
+            newStorage.tag = "Used";
             Rigidbody rb = newStorage.AddComponent<Rigidbody>();
         }
         storageDetached = true;
