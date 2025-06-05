@@ -743,7 +743,7 @@
                     "name": "UI Press",
                     "type": "Button",
                     "id": "7e1eced7-c774-4fe5-be8f-d8711f646d9e",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -797,7 +797,7 @@
                     "name": "Scale Toggle",
                     "type": "Button",
                     "id": "80ed7d74-56de-473c-bf76-da3bdd16b562",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -815,6 +815,15 @@
                     "name": "Menu",
                     "type": "Button",
                     "id": "2737490b-f693-45fc-92fc-118323810890",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Reload",
+                    "type": "Button",
+                    "id": "a07f03a7-3bfd-4809-9a60-527b94028eff",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -1006,6 +1015,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "951044e4-3b47-4a95-aa0c-9b1a96da613c",
+                    "path": "<XRController>/{PrimaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reload",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
