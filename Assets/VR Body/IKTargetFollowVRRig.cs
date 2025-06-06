@@ -7,12 +7,22 @@ public class VRMap
     public Transform ikTarget;
     public Vector3 trackingPositionOffset;
     public Vector3 trackingRotationOffset;
+
     public void Map()
     {
         ikTarget.position = vrTarget.TransformPoint(trackingPositionOffset);
         ikTarget.rotation = vrTarget.rotation * Quaternion.Euler(trackingRotationOffset);
+        // Debug.Log($"Map called: ikTarget {ikTarget.name} set to position {ikTarget.position}");
+    }
+
+    public void SetTarget(Transform newTarget)
+    {
+        vrTarget = newTarget;
+        Map();  // Обновляем позицию сразу
+        // Debug.Log($"SetTarget called: new vrTarget is {vrTarget.name}");
     }
 }
+
 
 public class IKTargetFollowVRRig : MonoBehaviour
 {
@@ -21,11 +31,9 @@ public class IKTargetFollowVRRig : MonoBehaviour
     public VRMap head;
     public VRMap leftHand;
     public VRMap rightHand;
-
     public Vector3 headBodyPositionOffset;
     public float headBodyYawOffset;
 
-    // Update is called once per frame
     void LateUpdate()
     {
         transform.position = head.ikTarget.position + headBodyPositionOffset;
