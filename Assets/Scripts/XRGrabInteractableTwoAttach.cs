@@ -6,27 +6,40 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 public class XRGrabInteractableTwoAttach : XRGrabInteractable
 {
     [Header("Attaches")]
-    public Transform leftHandAttach;
-    public Transform rightHandAttach;
+    public Transform rightAttachPoint;
+    public Transform leftAttachPoint;
+    public Transform rightArmIKTarget;
+    public Transform leftArmIKTarget;
+    public VRMap rightHandVRMap;
+    public VRMap leftHandVRMap;
 
     protected override void OnSelectEntered(SelectEnterEventArgs args)
     {
-        Debug.Log(args.interactorObject.transform.tag);
-        if (args.interactorObject.transform.CompareTag("Left Hand"))
+        if (args.interactorObject.transform.CompareTag("Right Hand"))
         {
-            Debug.Log($"I work! {args.interactorObject.transform.name} ");
-            attachTransform = leftHandAttach;
+            attachTransform = rightAttachPoint;
+            rightHandVRMap.SetTarget(rightAttachPoint);
         }
-        else if (args.interactorObject.transform.CompareTag("Right Hand"))
+        else if (args.interactorObject.transform.CompareTag("Left Hand"))
         {
-            Debug.Log($"I work! {args.interactorObject.transform.tag}");
-            attachTransform = rightHandAttach;
-        }
-        else
-        {
-            Debug.Log("I don't work! " + args.interactorObject.transform.name);
+            attachTransform = leftAttachPoint;
+            leftHandVRMap.SetTarget(leftAttachPoint);
         }
 
         base.OnSelectEntered(args);
+    }
+    
+    protected override void OnSelectExited(SelectExitEventArgs args)
+    {
+        if (args.interactorObject.transform.CompareTag("Right Hand"))
+        {
+            rightHandVRMap.SetTarget(rightArmIKTarget); // XR Controller
+        }
+        else if (args.interactorObject.transform.CompareTag("Left Hand"))
+        {
+            leftHandVRMap.SetTarget(leftArmIKTarget); // XR Controller
+        }
+
+        base.OnSelectExited(args);
     }
 }

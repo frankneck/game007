@@ -1282,7 +1282,7 @@ GameObject:
   m_Component:
   - component: {fileID: 191366790}
   m_Layer: 0
-  m_Name: Right Hand Attach
+  m_Name: Right Attach Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1297,7 +1297,7 @@ Transform:
   m_GameObject: {fileID: 191366789}
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000029802319, y: -0.000000059604638, z: -0.7071064, w: 0.70710725}
-  m_LocalPosition: {x: 0, y: -0.0138999885, z: 0.057499994}
+  m_LocalPosition: {x: -0.01, y: 0.03, z: 0.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1430,8 +1430,20 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
-  leftHandAttach: {fileID: 1632062515}
-  rightHandAttach: {fileID: 191366790}
+  rightAttachPoint: {fileID: 191366790}
+  leftAttachPoint: {fileID: 1632062515}
+  rightArmIKTarget: {fileID: 1553823196002088967}
+  leftArmIKTarget: {fileID: 9111920415091466343}
+  rightHandVRMap:
+    vrTarget: {fileID: 7986166599891814671}
+    ikTarget: {fileID: 1553823196002088967}
+    trackingPositionOffset: {x: 0, y: 0, z: 0}
+    trackingRotationOffset: {x: 0, y: 0, z: 0}
+  leftHandVRMap:
+    vrTarget: {fileID: 4874195905345762141}
+    ikTarget: {fileID: 9111920415091466343}
+    trackingPositionOffset: {x: 0, y: 0, z: 0}
+    trackingRotationOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &226333998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5710,6 +5722,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1135830478
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1135830479}
+  m_Layer: 0
+  m_Name: Left Attach Target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1135830479
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1135830478}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.026400894, y: -0.002364874, z: 0.8177099, w: 0.57501996}
+  m_LocalPosition: {x: -7.255178, y: 3.8102748, z: -0.785296}
+  m_LocalScale: {x: 0.2969381, y: 0.29693824, z: 0.2969382}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4500132187620591577}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1164311123
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8145,7 +8188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1632062515}
   m_Layer: 0
-  m_Name: Left Hand Attach
+  m_Name: Left Attach Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10836,6 +10879,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.007576804, y: 0.0010342728, z: 0.0003362429}
   m_Center: {x: -0.00024480885, y: -0.00027946735, z: -0.0004076206}
+--- !u!1 &2142990134
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2142990135}
+  m_Layer: 0
+  m_Name: Right Attach Target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2142990135
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2142990134}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.14464693, y: 0.6820639, z: -0.11489682, w: 0.7075769}
+  m_LocalPosition: {x: 7.2420225, y: 3.9407198, z: -0.73588413}
+  m_LocalScale: {x: 0.29693815, y: 0.29693815, z: 0.29693824}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4500132187620591577}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 90}
 --- !u!1 &5998878007896507
 GameObject:
   m_ObjectHideFlags: 0
@@ -17302,6 +17376,8 @@ Transform:
   m_LocalScale: {x: 0.34565252, y: 0.34565252, z: 0.34565252}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2142990135}
+  - {fileID: 1135830479}
   - {fileID: 7036599398091213362}
   - {fileID: 5744706020004345184}
   - {fileID: 5540409325939695947}
@@ -17419,6 +17495,18 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Left Hand
       objectReference: {fileID: 0}
+    - target: {fileID: 2101291605532234477, guid: 33d109d71b922c049a404fec7ecdf400, type: 3}
+      propertyPath: m_Handedness
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3342937331057718686, guid: 33d109d71b922c049a404fec7ecdf400, type: 3}
+      propertyPath: m_Handedness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3342937331057718686, guid: 33d109d71b922c049a404fec7ecdf400, type: 3}
+      propertyPath: m_AttachTransform
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4187531530145002299, guid: 33d109d71b922c049a404fec7ecdf400, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -17433,7 +17521,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4659111788642704792, guid: 33d109d71b922c049a404fec7ecdf400, type: 3}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4789447343988198927, guid: 33d109d71b922c049a404fec7ecdf400, type: 3}
       propertyPath: m_TagString
@@ -17514,43 +17602,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5546768501779190174, guid: 33d109d71b922c049a404fec7ecdf400, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4631373918538769053}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33d109d71b922c049a404fec7ecdf400, type: 3}
---- !u!1 &4631373918538769052 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5546768501779190174, guid: 33d109d71b922c049a404fec7ecdf400, type: 3}
-  m_PrefabInstance: {fileID: 4631373918538769051}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &4631373918538769053
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4631373918538769052}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.15
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!4 &4642777951049195281
 Transform:
   m_ObjectHideFlags: 0
@@ -24355,8 +24408,20 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
-  leftHandAttach: {fileID: 0}
-  rightHandAttach: {fileID: 0}
+  rightAttachPoint: {fileID: 0}
+  leftAttachPoint: {fileID: 0}
+  rightArmIKTarget: {fileID: 0}
+  leftArmIKTarget: {fileID: 0}
+  rightHandVRMap:
+    vrTarget: {fileID: 0}
+    ikTarget: {fileID: 0}
+    trackingPositionOffset: {x: 0, y: 0, z: 0}
+    trackingRotationOffset: {x: 0, y: 0, z: 0}
+  leftHandVRMap:
+    vrTarget: {fileID: 0}
+    ikTarget: {fileID: 0}
+    trackingPositionOffset: {x: 0, y: 0, z: 0}
+    trackingRotationOffset: {x: 0, y: 0, z: 0}
 --- !u!33 &8585166848133759898
 MeshFilter:
   m_ObjectHideFlags: 0
