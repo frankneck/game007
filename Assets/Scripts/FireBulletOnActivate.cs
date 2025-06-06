@@ -22,13 +22,13 @@ public class FireBulletOnActivate : MonoBehaviour
 
     public int maxAmmo = 20;
     public AnimationClip storageTakeOutClip;
-    private int currentAmmo = 0;
+    private int currentAmmo;
 
     void Start()
     {
         XRGrabInteractable grabable = GetComponent<XRGrabInteractable>();
         grabable.activated.AddListener(FireBullet);
-        currentAmmo = 0;
+        currentAmmo = 10; // для тестов
     }
 
     void Update()

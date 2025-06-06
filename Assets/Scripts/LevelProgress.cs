@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelProgress
 {
-    public int levelScore;    
+    [Header("Прогресс")]
+    [SerializeField] int levelScore = 0;
+    
 }
