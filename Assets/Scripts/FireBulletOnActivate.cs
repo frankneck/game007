@@ -12,7 +12,9 @@ public class FireBulletOnActivate : Sounds
     public GameObject bullet;
     public Transform spawnPoint;
     public float bulletSpeed;
-   
+    public ParticleSystem muzzleFlash;
+    public ParticleSystem impactParticleSystem;
+
     [Header("Разное")]
     public Animator animator;
     public InputActionProperty left;
@@ -30,6 +32,7 @@ public class FireBulletOnActivate : Sounds
     private int currentAmmo;
     private bool isEmpty;
     private bool storageDetached;
+    private RaycastHit hit;
 
     void Start()
     {
@@ -52,7 +55,6 @@ public class FireBulletOnActivate : Sounds
             }
         }
 
-        Debug.Log($"Магазин пустой? {isEmpty}");
     }
 
     public void FireBullet(ActivateEventArgs arg)
@@ -64,26 +66,31 @@ public class FireBulletOnActivate : Sounds
                 PlaySound(sounds[2]); // сухой выстрел
                 animator.SetTrigger("EMPTY");
             }
-
-            Debug.Log("No ammo!");
         }
         else
         {
             if (animator != null)
             {
+                muzzleFlash.Play();
                 PlaySound(sounds[0]); // выстрел
                 animator.SetTrigger("SHOT");
                 GameObject spawnedBullet = Instantiate(bullet);
                 spawnedBullet.transform.position = spawnPoint.position;
                 spawnedBullet.GetComponent<Rigidbody>().velocity = spawnPoint.forward * bulletSpeed;
-                Debug.Log("Bullet spawned");
                 currentAmmo--;
 
                 StartCoroutine(BulletShellFalling());
 
                 Destroy(spawnedBullet, 5);
             }
+
+            if (Physics.Raycast(spawnPoint.position, transform.forward, out hit))
+            {
+                Instantiate(impactParticleSystem, hit.point, Quaternion.LookRotation(hit.normal));
+            }
         }
+
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -140,6 +147,7 @@ public class FireBulletOnActivate : Sounds
     {
         yield return new WaitForSeconds(delayOfShellFalling);
 
+        muzzleFlash.Stop();
         PlaySound(sounds[4]); // звук падения гильзы
     }
 }
