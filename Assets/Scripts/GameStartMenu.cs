@@ -21,12 +21,13 @@ public class GameStartMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EnableMainMenu();
-
         //Hook events
         startButton.onClick.AddListener(StartGame);
         optionButton.onClick.AddListener(EnableOption);
-        aboutButton.onClick.AddListener(EnableAbout);
+
+        if (aboutButton != null)
+            aboutButton.onClick.AddListener(EnableAbout);
+
         quitButton.onClick.AddListener(QuitGame);
 
         foreach (var item in returnButtons)
@@ -50,25 +51,33 @@ public class GameStartMenu : MonoBehaviour
     {
         mainMenu.SetActive(false);
         options.SetActive(false);
-        about.SetActive(false);
+
+        if (aboutButton != null)
+            about.SetActive(false);
     }
 
     public void EnableMainMenu()
     {
         mainMenu.SetActive(true);
         options.SetActive(false);
-        about.SetActive(false);
+
+        if (aboutButton != null)
+            about.SetActive(false);
     }
     public void EnableOption()
     {
         mainMenu.SetActive(false);
         options.SetActive(true);
-        about.SetActive(false);
+
+        if (aboutButton != null)
+            about.SetActive(false);
     }
     public void EnableAbout()
     {
         mainMenu.SetActive(false);
         options.SetActive(false);
-        about.SetActive(true);
+
+        if (aboutButton != null)
+            about.SetActive(false);
     }
 }
