@@ -11,6 +11,7 @@ TagManager:
   - Right Hand
   - Storage
   - Used
+  - Gun
   layers:
   - Default
   - TransparentFX
