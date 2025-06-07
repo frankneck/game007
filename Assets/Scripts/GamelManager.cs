@@ -26,7 +26,7 @@ public class GameBehaviour : MonoBehaviour
             if (_itemsCollected >= maxItems)
             {
                 labelText = "Ты попал во все мишени!";
-                ChangeGameState(false, true);
+                // ChangeGameState(false, true);
             }
             else
             {
@@ -35,19 +35,19 @@ public class GameBehaviour : MonoBehaviour
         }
     }
 
-    private void ChangeGameState(bool showLossScreen = false, bool showWinScreen = false)
-    {   
-        if (showLossScreen)
-        {
-            this.showLossScreen = showLossScreen;
-        }
-        else if (showWinScreen)
-        {
-            this.showWinScreen = showWinScreen;
-        }
+    // private void ChangeGameState(bool showLossScreen = false, bool showWinScreen = false)
+    // {   
+    //     if (showLossScreen)
+    //     {
+    //         this.showLossScreen = showLossScreen;
+    //     }
+    //     else if (showWinScreen)
+    //     {
+    //         this.showWinScreen = showWinScreen;
+    //     }
 
-        Time.timeScale = 0f;
-    }
+    //     Time.timeScale = 0f;
+    // }
 
     private void OnGUI()
     {        

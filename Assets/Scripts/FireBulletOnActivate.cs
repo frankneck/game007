@@ -6,23 +6,30 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
-public class FireBulletOnActivate : MonoBehaviour
+public class FireBulletOnActivate : Sounds
 {
+    [Header("Настройки пули")]
     public GameObject bullet;
     public Transform spawnPoint;
     public float bulletSpeed;
+   
+    [Header("Разное")]
     public Animator animator;
-    public GameObject ammo;
     public InputActionProperty left;
     public InputActionProperty right;
     public Transform storageEjectPoint;
+    public float delayOfShellFalling = 1f;
 
-    public GameObject storage;
-    private bool storageDetached;
-
+    [Header("Настройки магазина")]
     public int maxAmmo = 20;
+    public GameObject storage;
+    public GameObject ammo;
+    public Material usedMaterial;
     public AnimationClip storageTakeOutClip;
+
     private int currentAmmo;
+    private bool isEmpty;
+    private bool storageDetached;
 
     void Start()
     {
@@ -44,6 +51,8 @@ public class FireBulletOnActivate : MonoBehaviour
                 StorageDetach();
             }
         }
+
+        Debug.Log($"Магазин пустой? {isEmpty}");
     }
 
     public void FireBullet(ActivateEventArgs arg)
@@ -52,6 +61,7 @@ public class FireBulletOnActivate : MonoBehaviour
         {
             if (animator != null)
             {
+                PlaySound(sounds[2]); // сухой выстрел
                 animator.SetTrigger("EMPTY");
             }
 
@@ -61,12 +71,15 @@ public class FireBulletOnActivate : MonoBehaviour
         {
             if (animator != null)
             {
+                PlaySound(sounds[0]); // выстрел
                 animator.SetTrigger("SHOT");
                 GameObject spawnedBullet = Instantiate(bullet);
                 spawnedBullet.transform.position = spawnPoint.position;
                 spawnedBullet.GetComponent<Rigidbody>().velocity = spawnPoint.forward * bulletSpeed;
                 Debug.Log("Bullet spawned");
                 currentAmmo--;
+
+                StartCoroutine(BulletShellFalling());
 
                 Destroy(spawnedBullet, 5);
             }
@@ -75,7 +88,7 @@ public class FireBulletOnActivate : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Storage") && currentAmmo <= 0)
+        if (other.CompareTag("Storage") && currentAmmo <= 0 && isEmpty)
         {
             Reload();
             Destroy(other.gameObject);
@@ -87,17 +100,21 @@ public class FireBulletOnActivate : MonoBehaviour
     {
         if (animator != null)
         {
+            PlaySound(sounds[1]); // сухой выстрел
             animator.SetTrigger("RELOADED");
-            Debug.Log("Преждевременная перезарядка");
             storage.SetActive(true);
         }
         currentAmmo = maxAmmo;
 
         storageDetached = false; // разрешаем снова вытащить магазин
+        isEmpty = false;
     }
 
     public void StorageDetach()
     {
+        PlaySound(sounds[3]); // звук вытаскивания
+        isEmpty = true;
+        currentAmmo = 0;
         animator.SetTrigger("StorageTakeOut");
         StartCoroutine(DisableStorage());
     }
@@ -110,9 +127,20 @@ public class FireBulletOnActivate : MonoBehaviour
             storage.SetActive(false);
             GameObject newStorage = GameObject.Instantiate(ammo, storageEjectPoint.position, storageEjectPoint.rotation);
             newStorage.tag = "Used";
+
+            if (usedMaterial != null)
+                newStorage.GetComponent<MeshRenderer>().material = usedMaterial;
+
             Rigidbody rb = newStorage.AddComponent<Rigidbody>();
         }
         storageDetached = true;
+    }
+
+    private IEnumerator BulletShellFalling()
+    {
+        yield return new WaitForSeconds(delayOfShellFalling);
+
+        PlaySound(sounds[4]); // звук падения гильзы
     }
 }
 
