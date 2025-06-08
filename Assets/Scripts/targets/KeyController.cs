@@ -5,10 +5,10 @@ public class KeyController : MonoBehaviour
 {
     public AudioSource tickAudioSource;
     public AudioSource hornAudioSource;
+    public GameBehaviour gameBehaviour;
     [SerializeField] private float tickInterval = 1f;
     [SerializeField] private TargetAndColliderController[] targetControllers;
     [SerializeField] private float pressDistance = 0.07f;
-
     private Vector3 initialPosition;
     private bool isPressed;
     private Rigidbody rb;
@@ -93,10 +93,8 @@ public class KeyController : MonoBehaviour
             elapsed += tickInterval;
         }
 
-        foreach (var controller in targetControllers)
-        {
-            controller?.MoveDown();
-        }
+        targetControllers[0]?.MoveDown();
+        gameBehaviour?.StartGame();
 
         isPressed = true;
         ignoreUpdate = false;

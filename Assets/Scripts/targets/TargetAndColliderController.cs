@@ -2,19 +2,21 @@ using UnityEngine;
 
 public class TargetAndColliderController : MonoBehaviour
 {
-    public float rotationSpeed = 5f; // Увеличиваем скорость опускания
-    public float rotationSpeedUp = 10f; // Увеличиваем скорость подъёма
-    [SerializeField] private Transform boneTransform; // Указываем Кость.001 вручную в Inspector
-    private bool isRotating = false; // Флаг вращения
-    private Quaternion targetRotation; // Целевой поворот кости
-    private Quaternion initialBoneRotation; // Начальный поворот (поднятое состояние)
-    private Quaternion activeBoneRotation; // Целевой поворот (опущенное состояние)
-    private bool isActiveState = false; // Текущее состояние
-    private Transform rootTarget; // Корневой объект мишени (Cube.005)
+    public float rotationSpeed = 5f; // РЎРєРѕСЂРѕСЃС‚СЊ РІСЂР°С‰РµРЅРёСЏ РІРІРµСЂС… (Рљ РёР·РЅР°С‡Р°Р»СЊРЅРѕР№ РїРѕР·РёС†РёРё)
+    public float rotationSpeedUp = 20f; // РЎРєРѕСЂРѕСЃС‚СЊ РІСЂР°С‰РµРЅРёСЏ РІРЅРёР· (РџРѕСЃР»Рµ РІС‹Р·РѕРІР° MoveDown())
+    public GameBehaviour gameManager;
+    [SerializeField] private Transform boneTransform; // !!! РјС‹ РІСЂР°С‰Р°РµРј СЌС‚Рѕ !!!
+    private bool isRotating = false; // С„Р»Р°Рі, РїРѕРєР°Р·С‹РІР°СЋС‰С‚Р№, РёРґРµС‚ Р»Рё РІСЂР°С‰РµРЅРёРµ РєРѕСЃС‚Рё
+    private Quaternion targetRotation; // Рљ С‡РµРјСѓ РєРѕСЃС‚СЊ РґРѕР»Р¶РЅР° РїРѕРІРµСЂРЅСѓС‚СЊСЃСЏ
+    private Quaternion initialBoneRotation; // РќР°С‡Р°Р»СЊРЅР°СЏ РѕСЂРёРµРЅС‚Р°С†РёСЏ РєРѕСЃС‚Рё
+    private Quaternion activeBoneRotation; // РљРѕРЅРµС‡РµРЅР°СЏ РѕСЂРёРµРЅС‚Р°С†РёСЏ РєРѕСЃС‚Рё
+    private bool isActiveState = false; // Р°РєС‚РёРІРЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ (РЅРµС‚)
+    private Transform rootTarget; // (Cube.005) РЎР°РјС‹Р№ РІРЅРµС€РЅРёР№ РѕР±СЉРµРєС‚ (СЂРѕРґРёС‚РµР»СЊСЃРєРёР№)
 
     void Start()
     {
-        // Ищем SkinnedMeshRenderer на родителях, пока не найдём Cube.XXX
+        GameObject temp = GameObject.Find("GameManager");
+        gameManager = temp.GetComponent<GameBehaviour>();
         Transform currentParent = transform;
         SkinnedMeshRenderer skinnedMesh = null;
         while (currentParent != null)
@@ -30,48 +32,52 @@ public class TargetAndColliderController : MonoBehaviour
 
         if (skinnedMesh != null)
         {
-            Debug.Log(rootTarget.name + ": SkinnedMeshRenderer найден, Root Bone: " + skinnedMesh.rootBone.name + " на объекте: " + gameObject.name);
+            Debug.Log(rootTarget.name + ": SkinnedMeshRenderer пїЅпїЅпїЅпїЅпїЅпїЅ, Root Bone: " + skinnedMesh.rootBone.name + " пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " + gameObject.name);
             if (boneTransform != null)
             {
-                if (boneTransform.name != "Кость.001")
+                if (boneTransform.name != "пїЅпїЅпїЅпїЅпїЅ.001")
                 {
-                    Debug.LogWarning(rootTarget.name + ": Указанная кость (" + boneTransform.name + ") не является Кость.001 на объекте: " + gameObject.name + "!");
+                    Debug.LogWarning(rootTarget.name + ": пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ (" + boneTransform.name + ") пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.001 пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " + gameObject.name + "!");
                 }
-                initialBoneRotation = Quaternion.Euler(0.264194429f, 57.6771584f, 180f); // Поднятое
-                activeBoneRotation = Quaternion.Euler(331.093536f, 29.2526035f, 270.054413f); // Опущенное
+
+                initialBoneRotation = Quaternion.Euler(0.264194429f, 57.6771584f, 180f); // РёР·РЅР°С‡Р°Р»СЊРЅР°СЏ РїРѕР·РёС†РёСЏ РјРёС€РµРЅРё
+                activeBoneRotation = Quaternion.Euler(331.093536f, 29.2526035f, 270.054413f); // РєРѕРЅРµС‡РЅР°СЏ РїРѕР·РёС†РёСЏ РјРёС€РµРЅРёРё (Р°РєС‚РёРІРёСЂРѕРІР°РЅРЅРѕР№)
+
+                // РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РґР°РЅРЅС‹С… 
                 boneTransform.localRotation = initialBoneRotation;
                 targetRotation = initialBoneRotation;
                 isActiveState = false;
 
-                Debug.Log(rootTarget.name + " начальный поворот кости: " + boneTransform.localRotation.eulerAngles + " на объекте: " + gameObject.name);
+                Debug.Log(rootTarget.name + " пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ: " + boneTransform.localRotation.eulerAngles + " пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " + gameObject.name);
             }
             else
             {
-                Debug.LogError(rootTarget.name + ": Bone Transform не указан в Inspector! Укажи Кость.001 на объекте: " + gameObject.name + ".");
+                Debug.LogError(rootTarget.name + ": Bone Transform пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ Inspector! пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.001 пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " + gameObject.name + ".");
             }
         }
         else
         {
-            Debug.LogError("SkinnedMeshRenderer не найден на родителях " + gameObject.name + "! Проверьте иерархию объекта.");
+            Debug.LogError("SkinnedMeshRenderer пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ " + gameObject.name + "! пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.");
         }
     }
 
     public void MoveDown()
     {
-        Debug.Log("MoveDown вызван для объекта: " + gameObject.name + " из источника: " + new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().Name);
-        if (boneTransform != null && !isRotating)
+        Debug.Log("MoveDown пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " + gameObject.name + " пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " + new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().Name);
+
+        if (boneTransform != null && !isRotating) // isRoating == false РїСЂРё РёРЅРёС†РёР°Р»РёР·Р°С†РёРё
         {
-            Debug.Log(rootTarget.name + " начинает переход в опущенное состояние на объекте: " + gameObject.name + "!");
-            targetRotation = activeBoneRotation;
+            Debug.Log(rootTarget.name + " пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " + gameObject.name + "!");
+            targetRotation = activeBoneRotation; // РЅР°С€Р° С†РµР»СЊ - РєРѕРЅРµС‡РЅР°СЏ РїРѕР·РёС†РёСЏ РјРёС€РµРЅРё (Р°РєС‚РёРІРЅРѕР№) 
             isRotating = true;
             isActiveState = true;
-            Debug.Log("Установлена цель вращения: " + targetRotation.eulerAngles);
+            Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " + targetRotation.eulerAngles);
         }
-        else
+        else   // РёРЅР°С‡Рµ РѕС€РёР±РєР°
         {
-            Debug.LogWarning(rootTarget.name + " не может опуститься: boneTransform = " + (boneTransform != null) + ", isRotating = " + isRotating + " на объекте: " + gameObject.name);
-            if (boneTransform == null) Debug.LogError("boneTransform не назначен!");
-            if (isRotating) Debug.LogWarning("Вращение уже в процессе!");
+            Debug.LogWarning(rootTarget.name + " пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: boneTransform = " + (boneTransform != null) + ", isRotating = " + isRotating + " пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " + gameObject.name);
+            if (boneTransform == null) Debug.LogError("boneTransform пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
+            if (isRotating) Debug.LogWarning("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
         }
     }
 
@@ -79,31 +85,48 @@ public class TargetAndColliderController : MonoBehaviour
     {
         if (isRotating && boneTransform != null)
         {
+            // Р•СЃР»Рё РѕР±СЉРµРєС‚ Р°РєС‚РёРІРёСЂСѓРµС‚СЃСЏ (РґРІРёР¶РµС‚СЃСЏ РІ Р°РєС‚РёРІРЅРѕРµ РїРѕР»РѕР¶РµРЅРёРµ), РІСЂР°С‰Р°РµРј Р±С‹СЃС‚СЂРµРµ (rotationSpeedUp),
+            // РµСЃР»Рё РІРѕР·РІСЂР°С‰Р°РµС‚СЃСЏ РІ РёСЃС…РѕРґРЅРѕРµ вЂ” РјРµРґР»РµРЅРЅРµРµ (rotationSpeed)
             float speed = isActiveState ? rotationSpeed : rotationSpeedUp;
-            Quaternion previousRotation = boneTransform.localRotation;
+
+            // РїРѕРІРѕСЂС‚ РєРѕСЃС‚Рё РґРѕ С†РµР»РµРІРѕР№ РѕСЂРёРµРЅС‚Р°С†РёРё
             boneTransform.localRotation = Quaternion.Lerp(boneTransform.localRotation, targetRotation, speed * Time.deltaTime);
 
-            Debug.Log(rootTarget.name + " текущий поворот кости: " + boneTransform.localRotation.eulerAngles + ", цель: " + targetRotation.eulerAngles + " на объекте: " + gameObject.name + ", разница: " + Quaternion.Angle(boneTransform.localRotation, targetRotation));
+            Debug.Log(rootTarget.name + " пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ: " + boneTransform.localRotation.eulerAngles + ", пїЅпїЅпїЅпїЅ: " + targetRotation.eulerAngles + " пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " + gameObject.name + ", пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " + Quaternion.Angle(boneTransform.localRotation, targetRotation));
 
             if (Quaternion.Angle(boneTransform.localRotation, targetRotation) < 0.1f)
             {
-                Debug.Log(rootTarget.name + " кость достигла цели: " + (isActiveState ? "опущенное" : "поднятое") + " состояние на объекте: " + gameObject.name);
+                Debug.Log(rootTarget.name + " пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ: " + (isActiveState ? "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" : "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ") + " пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " + gameObject.name);
                 boneTransform.localRotation = targetRotation;
                 isRotating = false;
-                Debug.Log("Вращение завершено для объекта: " + gameObject.name);
+                Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " + gameObject.name);
             }
         }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Projectile") && !isRotating)
+        if (collision.gameObject.CompareTag("Projectile") && isActiveState)
         {
-            Debug.Log(rootTarget.name + " поражена снарядом, поднимаем кость на объекте: " + gameObject.name + " от объекта: " + collision.gameObject.name + "!");
-            Destroy(collision.gameObject); // Уничтожаем пулю
+            Debug.Log("Р•СЃС‚СЊ РїРѕРїР°РґР°РЅРёРµ");
+            Destroy(collision.gameObject);
             targetRotation = initialBoneRotation;
             isRotating = true;
             isActiveState = false;
+            gameManager.Items += 1;
+        }
+        else
+        {
+            Debug.Log("РќРµ Р·Р°СЃС‡РёС‚Р°РЅ!");
+            Destroy(collision.gameObject);
         }
     }
+
+    public void ResetTarget() // РјРµС‚РѕРґ РІ TargetAndColliderController, РєРѕС‚РѕСЂС‹Р№ РІРѕР·РІСЂР°С‰Р°РµС‚ РјРёС€РµРЅСЊ РІ РёСЃС…РѕРґРЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ
+    {
+        targetRotation = initialBoneRotation;
+        isRotating = true;
+        isActiveState = false;
+    }
+
 }
