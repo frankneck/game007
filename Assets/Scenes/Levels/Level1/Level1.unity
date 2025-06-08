@@ -737,8 +737,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2c1eb3b5fcc4fd4381b767c48f0aed1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetControllers:
+  - {fileID: 1050576640}
+  - {fileID: 185355797}
+  - {fileID: 1747480885}
+  - {fileID: 410689973}
+  - {fileID: 732897820}
   labelText: "\u041F\u043E\u043F\u0430\u0434\u0438 \u0432\u043E \u0432\u0441\u0435
     \u043C\u0438\u0448\u0435\u043D\u0438!"
+  gameDuration: 10
   maxItems: 5
   showWinScreen: 0
 --- !u!4 &96242318 stripped
@@ -6109,7 +6116,6 @@ GameObject:
   - component: {fileID: 185355799}
   - component: {fileID: 185355798}
   - component: {fileID: 185355797}
-  - component: {fileID: 185355800}
   m_Layer: 0
   m_Name: ColliderHolder
   m_TagString: Target
@@ -6145,7 +6151,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 5
-  rotationSpeedUp: 10
+  rotationSpeedUp: 20
+  gameManager: {fileID: 48288253}
   boneTransform: {fileID: 7555840792545065423}
 --- !u!54 &185355798
 Rigidbody:
@@ -6195,19 +6202,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.002872514, y: 0.025111763, z: 0.020307016}
   m_Center: {x: -0.00025706788, y: 0.024246834, z: -0.009266236}
---- !u!114 &185355800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 185355795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c392e9b822739b049954ed0f0eb9f990, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameManager: {fileID: 48288253}
 --- !u!1 &191366789
 GameObject:
   m_ObjectHideFlags: 0
@@ -6992,7 +6986,6 @@ GameObject:
   - component: {fileID: 410689975}
   - component: {fileID: 410689974}
   - component: {fileID: 410689973}
-  - component: {fileID: 410689976}
   m_Layer: 0
   m_Name: ColliderHolder
   m_TagString: Target
@@ -7028,7 +7021,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 5
-  rotationSpeedUp: 10
+  rotationSpeedUp: 20
+  gameManager: {fileID: 48288253}
   boneTransform: {fileID: 9132682512725788770}
 --- !u!54 &410689974
 Rigidbody:
@@ -7078,19 +7072,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.002872514, y: 0.025111763, z: 0.020307016}
   m_Center: {x: -0.00025706788, y: 0.024246834, z: -0.009266236}
---- !u!114 &410689976
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 410689971}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c392e9b822739b049954ed0f0eb9f990, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameManager: {fileID: 48288253}
 --- !u!1 &429558616
 GameObject:
   m_ObjectHideFlags: 0
@@ -7858,6 +7839,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 5
   rotationSpeedUp: 10
+  gameManager: {fileID: 0}
   boneTransform: {fileID: 2592305507584665426}
 --- !u!4 &732897821
 Transform:
@@ -7934,7 +7916,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c392e9b822739b049954ed0f0eb9f990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 48288253}
 --- !u!4 &774095242 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8511924937620905978, guid: 2fe7901cea5c74441b21c648d89d346a, type: 3}
@@ -9737,7 +9718,6 @@ GameObject:
   - component: {fileID: 1050576639}
   - component: {fileID: 1050576638}
   - component: {fileID: 1050576640}
-  - component: {fileID: 1050576641}
   m_Layer: 0
   m_Name: ColliderHolder
   m_TagString: Target
@@ -9821,21 +9801,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 5
-  rotationSpeedUp: 10
-  boneTransform: {fileID: 5292610316170534664}
---- !u!114 &1050576641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1050576636}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c392e9b822739b049954ed0f0eb9f990, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  rotationSpeedUp: 20
   gameManager: {fileID: 48288253}
+  boneTransform: {fileID: 5292610316170534664}
 --- !u!1 &1057226841
 GameObject:
   m_ObjectHideFlags: 0
@@ -12892,7 +12860,6 @@ GameObject:
   - component: {fileID: 1747480887}
   - component: {fileID: 1747480886}
   - component: {fileID: 1747480885}
-  - component: {fileID: 1747480888}
   m_Layer: 0
   m_Name: ColliderHolder
   m_TagString: Target
@@ -12928,7 +12895,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 5
-  rotationSpeedUp: 10
+  rotationSpeedUp: 20
+  gameManager: {fileID: 48288253}
   boneTransform: {fileID: 8352280441828281097}
 --- !u!54 &1747480886
 Rigidbody:
@@ -12978,19 +12946,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.002872514, y: 0.025111763, z: 0.020307016}
   m_Center: {x: -0.00025706788, y: 0.024246834, z: -0.009266236}
---- !u!114 &1747480888
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1747480883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c392e9b822739b049954ed0f0eb9f990, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameManager: {fileID: 48288253}
 --- !u!1 &1755982854
 GameObject:
   m_ObjectHideFlags: 0
@@ -24684,6 +24639,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tickAudioSource: {fileID: 1009425178}
   hornAudioSource: {fileID: 160995994}
+  gameBehaviour: {fileID: 48288253}
   tickInterval: 1
   targetControllers:
   - {fileID: 1050576640}
