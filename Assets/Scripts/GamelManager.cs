@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,6 +11,9 @@ using Random = System.Random; // использую Random System
 public class GameBehaviour : MonoBehaviour
 {
     [SerializeField] private TargetAndColliderController[] targetControllers;
+    [SerializeField] private TextMeshProUGUI score;
+    [SerializeField] private TextMeshProUGUI currentScore;
+    [SerializeField] private int highScore;
     public string labelText = "Попади во все цели за определнное время";
     public float gameDuration = 10f;
     private float timeRemaining;
@@ -23,6 +27,7 @@ public class GameBehaviour : MonoBehaviour
     private List<int> availableIndices = new List<int>();
     private int count = 0;
     private bool isFirstSelection = true;
+    
     public string State
     {
         get { return _state; }
@@ -74,16 +79,6 @@ public class GameBehaviour : MonoBehaviour
             {
                 Debug.LogWarning($"TargetController по индексу {chosenIndex} = null");
             }
-
-            // Обновление текста на экране
-            if (_itemsCollected >= maxItems)
-            {
-                labelText = "Ты попал во все мишени!";
-            }
-            else
-            {
-                labelText = $"А ты меткий стрелок. Осталось: {maxItems - _itemsCollected}";
-            }
         }
     }
 
@@ -91,6 +86,7 @@ public class GameBehaviour : MonoBehaviour
     {
         random = new Random();
         availableIndices = Enumerable.Range(0, targetControllers.Length).ToList(); // все индексы
+        score.text = $"Рекорд: {highScore}";
     }
 
     void Update()
@@ -103,7 +99,14 @@ public class GameBehaviour : MonoBehaviour
             {
                 isGameActive = false;
                 labelText = "Время вышло";
-                Debug.Log("Игра окончена");
+
+                currentScore.text = $"Cчет: {_itemsCollected}"; // C - англйиская тк я ХЗ ЧЕ С Русской не такы
+
+                if (_itemsCollected > highScore)
+                {
+                    highScore = _itemsCollected;
+                    score.text = $"Рекорд: {highScore}";
+                }
 
                 ResetAllTargets();
             }
