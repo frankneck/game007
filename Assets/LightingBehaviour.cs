@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class LightingBehaviour : Sounds
@@ -11,6 +12,7 @@ public class LightingBehaviour : Sounds
     [Header("Single Lights")]
     [SerializeField] private Light deskLampLight;
     [SerializeField] private Light monitorLight;
+    [SerializeField] private Canvas pcInterface;
 
     [Header("Indicator")]
     [SerializeField] private LightColorChanger indicatorLight;
@@ -34,6 +36,7 @@ public class LightingBehaviour : Sounds
 
         if (deskLampLight != null) deskLampLight.enabled = false;
         if (monitorLight != null) monitorLight.enabled = false;
+        if (pcInterface != null) pcInterface.gameObject.SetActive(false);
     }
 
     public void TogglePower()
@@ -55,6 +58,7 @@ public class LightingBehaviour : Sounds
             TurnOffAllLights();
             indicatorLight.SetColorZero(); // Красный индикатор
             PlaySound(sounds[0]); // звук переключателя
+            PlaySound(sounds[3]); // звук выключения света
         }
     }
 
@@ -75,6 +79,12 @@ public class LightingBehaviour : Sounds
 
         if (monitorLight != null)
             monitorLight.enabled = true;
+
+        if (pcInterface != null)
+        {
+            PlaySound(sounds[2]); // звук включения компьютера
+            pcInterface.gameObject.SetActive(true);
+        }
     }
 
     private IEnumerator TurnOnLightGroup(Light[] lights)
