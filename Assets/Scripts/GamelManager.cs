@@ -1,15 +1,21 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using Random = System.Random; // использую Random System
 
-public class GameBehaviour : MonoBehaviour
+public class GameBehaviour : Sounds
 {
     [SerializeField] private TargetAndColliderController[] targetControllers;
+    [SerializeField] private TextMeshProUGUI score;
+    [SerializeField] private TextMeshProUGUI currentScore;
+    [SerializeField] private TextMeshProUGUI playerUI;
+    [SerializeField] private int highScore;
     public string labelText = "Попади во все цели за определнное время";
     public float gameDuration = 10f;
     private float timeRemaining;
@@ -23,6 +29,7 @@ public class GameBehaviour : MonoBehaviour
     private List<int> availableIndices = new List<int>();
     private int count = 0;
     private bool isFirstSelection = true;
+
     public string State
     {
         get { return _state; }
@@ -74,16 +81,6 @@ public class GameBehaviour : MonoBehaviour
             {
                 Debug.LogWarning($"TargetController по индексу {chosenIndex} = null");
             }
-
-            // Обновление текста на экране
-            if (_itemsCollected >= maxItems)
-            {
-                labelText = "Ты попал во все мишени!";
-            }
-            else
-            {
-                labelText = $"А ты меткий стрелок. Осталось: {maxItems - _itemsCollected}";
-            }
         }
     }
 
@@ -91,6 +88,7 @@ public class GameBehaviour : MonoBehaviour
     {
         random = new Random();
         availableIndices = Enumerable.Range(0, targetControllers.Length).ToList(); // все индексы
+        score.text = $"Рекорд: {highScore}";
     }
 
     void Update()
@@ -101,14 +99,25 @@ public class GameBehaviour : MonoBehaviour
 
             if (timeRemaining <= 0)
             {
+                playerUI.text = "Время вышло";
                 isGameActive = false;
                 labelText = "Время вышло";
-                Debug.Log("Игра окончена");
 
+                currentScore.text = $"Cчет: {_itemsCollected}"; // C - англйиская тк я ХЗ ЧЕ С Русской не такы
+
+                if (_itemsCollected > highScore)
+                {
+                    highScore = _itemsCollected;
+                    score.text = $"Рекорд: {highScore}";
+                }
+
+                StartCoroutine(ResetPlayerUI(1f));
                 ResetAllTargets();
+                PlaySound(sounds[0], volume: 0.6f, p1: 0.8f, p2: 0.9f); // звук завершения игры 
             }
         }
     }
+
     private void OnGUI()
     {
         GUI.Box(new Rect(20, 20, 150, 25), $"Попадания: {_itemsCollected}");
@@ -136,5 +145,11 @@ public class GameBehaviour : MonoBehaviour
         {
             target.ResetTarget(); // метод в TargetAndColliderController, который возвращает мишень в исходное состояние
         }
+    }
+
+    private IEnumerator ResetPlayerUI(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        playerUI.text = "";
     }
 }

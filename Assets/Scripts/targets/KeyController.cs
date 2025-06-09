@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class KeyController : MonoBehaviour
@@ -6,6 +7,7 @@ public class KeyController : MonoBehaviour
     public AudioSource tickAudioSource;
     public AudioSource hornAudioSource;
     public GameBehaviour gameBehaviour;
+    [SerializeField] private TextMeshProUGUI playerUI;
     [SerializeField] private float tickInterval = 1f;
     [SerializeField] private TargetAndColliderController[] targetControllers;
     [SerializeField] private float pressDistance = 0.07f;
@@ -18,6 +20,8 @@ public class KeyController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         initialPosition = transform.position;
+
+        playerUI.text = "";
     }
 
     private void Update()
@@ -71,6 +75,7 @@ public class KeyController : MonoBehaviour
     private IEnumerator DelayedTrigger(float delay)
     {
         float elapsed = 0f;
+        int count = 3;
 
         while (elapsed < delay)
         {
@@ -78,6 +83,7 @@ public class KeyController : MonoBehaviour
             {
                 if (tickAudioSource != null)
                 {
+                    playerUI.text = $"{count--}...";
                     tickAudioSource.Play();
                 }
             }
@@ -85,6 +91,7 @@ public class KeyController : MonoBehaviour
             {
                 if (tickAudioSource != null)
                 {
+                    playerUI.text = $"Начали!";
                     hornAudioSource.Play();
                 }
             }

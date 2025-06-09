@@ -7,5 +7,4 @@ public class LevelProgress
 {
     [Header("Прогресс")]
     [SerializeField] int levelScore = 0;
-    
 }

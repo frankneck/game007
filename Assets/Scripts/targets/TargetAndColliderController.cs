@@ -114,7 +114,7 @@ public class TargetAndColliderController : MonoBehaviour
             targetRotation = initialBoneRotation;
             isRotating = true;
             isActiveState = false;
-            gameManager.Items += 1;
+            gameManager.Items += 10;
         }
         else
         {
