@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using Random = System.Random; // использую Random System
 
-public class GameBehaviour : MonoBehaviour
+public class GameBehaviour : Sounds
 {
     [SerializeField] private TargetAndColliderController[] targetControllers;
     [SerializeField] private TextMeshProUGUI score;
@@ -113,10 +113,11 @@ public class GameBehaviour : MonoBehaviour
 
                 StartCoroutine(ResetPlayerUI(1f));
                 ResetAllTargets();
-                
+                PlaySound(sounds[0], volume: 0.6f, p1: 0.8f, p2: 0.9f); // звук завершения игры 
             }
         }
     }
+
     private void OnGUI()
     {
         GUI.Box(new Rect(20, 20, 150, 25), $"Попадания: {_itemsCollected}");

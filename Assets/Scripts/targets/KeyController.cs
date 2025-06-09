@@ -97,7 +97,6 @@ public class KeyController : MonoBehaviour
             }
 
             yield return new WaitForSeconds(tickInterval);
-            playerUI.text = "";
             elapsed += tickInterval;
         }
 
