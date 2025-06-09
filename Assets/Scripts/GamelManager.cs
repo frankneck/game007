@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -13,6 +14,7 @@ public class GameBehaviour : MonoBehaviour
     [SerializeField] private TargetAndColliderController[] targetControllers;
     [SerializeField] private TextMeshProUGUI score;
     [SerializeField] private TextMeshProUGUI currentScore;
+    [SerializeField] private TextMeshProUGUI playerUI;
     [SerializeField] private int highScore;
     public string labelText = "Попади во все цели за определнное время";
     public float gameDuration = 10f;
@@ -27,7 +29,7 @@ public class GameBehaviour : MonoBehaviour
     private List<int> availableIndices = new List<int>();
     private int count = 0;
     private bool isFirstSelection = true;
-    
+
     public string State
     {
         get { return _state; }
@@ -97,6 +99,7 @@ public class GameBehaviour : MonoBehaviour
 
             if (timeRemaining <= 0)
             {
+                playerUI.text = "Время вышло";
                 isGameActive = false;
                 labelText = "Время вышло";
 
@@ -108,7 +111,9 @@ public class GameBehaviour : MonoBehaviour
                     score.text = $"Рекорд: {highScore}";
                 }
 
+                StartCoroutine(ResetPlayerUI(1f));
                 ResetAllTargets();
+                
             }
         }
     }
@@ -139,5 +144,11 @@ public class GameBehaviour : MonoBehaviour
         {
             target.ResetTarget(); // метод в TargetAndColliderController, который возвращает мишень в исходное состояние
         }
+    }
+
+    private IEnumerator ResetPlayerUI(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        playerUI.text = "";
     }
 }
