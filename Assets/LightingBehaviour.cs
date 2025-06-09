@@ -74,7 +74,10 @@ public class LightingBehaviour : Sounds
         yield return new WaitForSeconds(delayBetweenSteps);
 
         if (deskLampLight != null)
+        {
+            PlaySound(sounds[4]); // звук включения настольной лампы
             deskLampLight.enabled = true;
+        }
         yield return new WaitForSeconds(delayBetweenSteps);
 
         if (monitorLight != null)
