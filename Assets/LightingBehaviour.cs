@@ -83,7 +83,7 @@ public class LightingBehaviour : Sounds
             light.enabled = true;
 
         if (sounds.Length > 0)
-            PlaySound(sounds[1], p1: 0.9f, p2: 1f); // звук переключателя
+            PlaySound(sounds[1], volume: 0.5f, p1: 0.9f, p2: 1f); // звук переключателя
         else
             Debug.LogWarning("Отсутсвует клип");    
 
