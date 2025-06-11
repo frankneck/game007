@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 0.41
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: ec46d2188d4b8774e847e75f1e12a8db, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 82b660520bdecce4daf45d270ec93fe4, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -1244,17 +1244,45 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3853898350432419992, guid: 5797518ee58474847bb6390d60132494, type: 3}
+      propertyPath: m_Range
+      value: 47.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853898350432419992, guid: 5797518ee58474847bb6390d60132494, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853898350432419992, guid: 5797518ee58474847bb6390d60132494, type: 3}
+      propertyPath: m_Intensity
+      value: 19.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4606015720777747397, guid: 5797518ee58474847bb6390d60132494, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.00008
+      objectReference: {fileID: 0}
+    - target: {fileID: 4606015720777747397, guid: 5797518ee58474847bb6390d60132494, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00048
+      objectReference: {fileID: 0}
+    - target: {fileID: 4606015720777747397, guid: 5797518ee58474847bb6390d60132494, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.1688
+      objectReference: {fileID: 0}
     - target: {fileID: 4827607530149373185, guid: 5797518ee58474847bb6390d60132494, type: 3}
       propertyPath: m_Name
       value: Light
       objectReference: {fileID: 0}
+    - target: {fileID: 5003902319578772037, guid: 5797518ee58474847bb6390d60132494, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -7674923503234155378, guid: aa62f9def5c5b75438ff55f3eb251d5f, type: 3}
     - target: {fileID: 5577783572118017826, guid: 5797518ee58474847bb6390d60132494, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.55572605
       objectReference: {fileID: 0}
     - target: {fileID: 5577783572118017826, guid: 5797518ee58474847bb6390d60132494, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 23.8
+      value: 23.27
       objectReference: {fileID: 0}
     - target: {fileID: 5577783572118017826, guid: 5797518ee58474847bb6390d60132494, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1291,7 +1319,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 308661075252607687, guid: 5797518ee58474847bb6390d60132494, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1751215515}
   m_SourcePrefab: {fileID: 100100000, guid: 5797518ee58474847bb6390d60132494, type: 3}
 --- !u!1 &789543846
 GameObject:
@@ -3690,6 +3721,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1491810033}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1751215512 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 308661075252607687, guid: 5797518ee58474847bb6390d60132494, type: 3}
+  m_PrefabInstance: {fileID: 786525682}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1751215515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751215512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e39f0f7e17f11f2448932da58e9b63d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alpha: 0.07
+  size: 0.1
+  direction: 0
+  velocity: {x: 0, y: 0, z: 0.47}
+  speed: 0.03
+  density: 5.14
+  spawnDistanceRange:
+    m_MinValue: 0
+    m_MaxValue: 0.7
+  spawnMinDistance: 0
+  spawnMaxDistance: 0.7
+  cullingEnabled: 0
+  cullingMaxDistance: 10
+  m_AlphaAdditionalRuntime: 1
 --- !u!1 &1790890644
 GameObject:
   m_ObjectHideFlags: 0
@@ -8737,6 +8799,10 @@ PrefabInstance:
     - target: {fileID: 3155655600632010579, guid: ba6bbcbe6fedeb3479e06a4d81c41244, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808315005657485369, guid: ba6bbcbe6fedeb3479e06a4d81c41244, type: 3}
+      propertyPath: m_text
+      value: "\u041D\u0430\u0447\u0430\u0442\u044C \u0438\u0433\u0440\u0443"
       objectReference: {fileID: 0}
     - target: {fileID: 9011777206680504831, guid: ba6bbcbe6fedeb3479e06a4d81c41244, type: 3}
       propertyPath: m_Camera
