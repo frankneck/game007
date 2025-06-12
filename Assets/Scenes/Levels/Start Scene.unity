@@ -853,7 +853,7 @@ GameObject:
   - component: {fileID: 575621896}
   - component: {fileID: 575621895}
   m_Layer: 0
-  m_Name: Ground (2)
+  m_Name: Floor Circle Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1067,57 +1067,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4155841864041922757, guid: 7f5f8c49c6b499046a26c194b0cb694b, type: 3}
   m_PrefabInstance: {fileID: 1628115493}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &639940613
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 639940615}
-  - component: {fileID: 639940614}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!320 &639940614
-PlayableDirector:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 639940613}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 8b667531116dce34ca3c218379667396, type: 2}
-  m_InitialState: 1
-  m_WrapMode: 2
-  m_DirectorUpdateMode: 1
-  m_InitialTime: 0
-  m_SceneBindings:
-  - key: {fileID: -8650054061452071866, guid: 8b667531116dce34ca3c218379667396, type: 2}
-    value: {fileID: 0}
-  m_ExposedReferences:
-    m_References: []
---- !u!4 &639940615
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 639940613}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.7421474, y: 4.0965466, z: 3.8284957}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &650606510
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3185,7 +3134,7 @@ GameObject:
   - component: {fileID: 1527613949}
   - component: {fileID: 1527613948}
   m_Layer: 0
-  m_Name: Game Title (1)
+  m_Name: Game Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8800,9 +8749,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4506603696779830356, guid: ba6bbcbe6fedeb3479e06a4d81c41244, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5808315005657485369, guid: ba6bbcbe6fedeb3479e06a4d81c41244, type: 3}
       propertyPath: m_text
       value: "\u041D\u0430\u0447\u0430\u0442\u044C \u0438\u0433\u0440\u0443"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7968337926749910350, guid: ba6bbcbe6fedeb3479e06a4d81c41244, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7968337926749910350, guid: ba6bbcbe6fedeb3479e06a4d81c41244, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7968337926749910350, guid: ba6bbcbe6fedeb3479e06a4d81c41244, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9011777206680504831, guid: ba6bbcbe6fedeb3479e06a4d81c41244, type: 3}
       propertyPath: m_Camera
@@ -12352,5 +12317,4 @@ SceneRoots:
   - {fileID: 575621898}
   - {fileID: 1527613950}
   - {fileID: 1832727124}
-  - {fileID: 639940615}
   - {fileID: 5500247391902993434}
