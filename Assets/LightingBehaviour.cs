@@ -8,16 +8,22 @@ public class LightingBehaviour : Sounds
     [SerializeField] private Light[] firstRowLights;
     [SerializeField] private Light[] secondRowLights;
     [SerializeField] private Light[] thirdRowLights;
+    [SerializeField] private GameObject[] firstRowVolumetricLights;
+    [SerializeField] private GameObject[] secondRowVolumetricLights;
+    [SerializeField] private GameObject[] thirdRowVolumetricLights;
 
-    [Header("Single Lights")]
+    [Header("Настройка света лампы")]
     [SerializeField] private Light deskLampLight;
-    [SerializeField] private Light monitorLight;
+    [SerializeField] private Light deskLampSpotLight;
+    [SerializeField] private GameObject deskVolumetricLight;
+
+    [Header("Настройка одиночных источников")]
     [SerializeField] private Canvas pcInterface;
 
-    [Header("Indicator")]
+    [Header("Индикатор")]
     [SerializeField] private LightColorChanger indicatorLight;
 
-    [Header("Timing")]
+    [Header("Время")]
     [SerializeField, Tooltip("Задержка между этапами включения")] private float delayBetweenSteps = 0.5f;
 
     private bool powerIsOn = false;
@@ -30,12 +36,22 @@ public class LightingBehaviour : Sounds
 
     void TurnOffAllLights()
     {
+        // Отключение точечных источников света
         foreach (var light in firstRowLights) light.enabled = false;
         foreach (var light in secondRowLights) light.enabled = false;
         foreach (var light in thirdRowLights) light.enabled = false;
 
+        // Отключение метричных лучей
+        foreach (var light in firstRowVolumetricLights) light.gameObject.SetActive(false);
+        foreach (var light in secondRowVolumetricLights) light.gameObject.SetActive(false);
+        foreach (var light in thirdRowVolumetricLights) light.gameObject.SetActive(false);
+
+        // Отключение светильника
         if (deskLampLight != null) deskLampLight.enabled = false;
-        if (monitorLight != null) monitorLight.enabled = false;
+        if (deskLampSpotLight != null) deskLampLight.enabled = false;
+        if (deskVolumetricLight != null) deskVolumetricLight.gameObject.SetActive(false);
+
+        // Отключение интерфейса приложения
         if (pcInterface != null) pcInterface.gameObject.SetActive(false);
     }
 
@@ -64,24 +80,23 @@ public class LightingBehaviour : Sounds
 
     private IEnumerator TurnOnLightsSequence()
     {
-        yield return TurnOnLightGroup(firstRowLights);
+        yield return TurnOnLightGroup(firstRowLights, firstRowVolumetricLights);
         yield return new WaitForSeconds(delayBetweenSteps);
 
-        yield return TurnOnLightGroup(secondRowLights);
+        yield return TurnOnLightGroup(secondRowLights, secondRowVolumetricLights);
         yield return new WaitForSeconds(delayBetweenSteps);
 
-        yield return TurnOnLightGroup(thirdRowLights);
+        yield return TurnOnLightGroup(thirdRowLights, thirdRowVolumetricLights);
         yield return new WaitForSeconds(delayBetweenSteps);
 
         if (deskLampLight != null)
         {
             PlaySound(sounds[4]); // звук включения настольной лампы
             deskLampLight.enabled = true;
+            deskLampSpotLight.enabled = true;
+            deskVolumetricLight.SetActive(true);
         }
         yield return new WaitForSeconds(delayBetweenSteps);
-
-        if (monitorLight != null)
-            monitorLight.enabled = true;
 
         if (pcInterface != null)
         {
@@ -90,10 +105,13 @@ public class LightingBehaviour : Sounds
         }
     }
 
-    private IEnumerator TurnOnLightGroup(Light[] lights)
+    private IEnumerator TurnOnLightGroup(Light[] pointLights, GameObject[] volumetricLights)
     {
-        foreach (var light in lights)
+        foreach (var light in pointLights)
             light.enabled = true;
+
+        foreach (var light in volumetricLights)
+            light.SetActive(true);
 
         if (sounds.Length > 0)
             PlaySound(sounds[1], volume: 0.5f, p1: 0.9f, p2: 1f); // звук переключателя
