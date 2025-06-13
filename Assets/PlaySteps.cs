@@ -34,6 +34,7 @@ public class PlaySteps : MonoBehaviour
 
             director.Stop();
             director.time = step.time;
+            Debug.Log("Анимация запустилась!");
             director.Play();
         }
     }
