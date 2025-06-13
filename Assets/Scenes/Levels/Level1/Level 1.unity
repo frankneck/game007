@@ -7737,6 +7737,11 @@ MonoBehaviour:
   - name: Open the door
     time: 0.5
     hasPlayed: 0
+--- !u!108 &361792084 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 3853898350432419992, guid: 5797518ee58474847bb6390d60132494, type: 3}
+  m_PrefabInstance: {fileID: 1918599243}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &366372526
 GameObject:
   m_ObjectHideFlags: 0
@@ -8960,6 +8965,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 754602734}
   m_CullTransparentMesh: 1
+--- !u!1 &757200712 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6407532311664236116, guid: 5797518ee58474847bb6390d60132494, type: 3}
+  m_PrefabInstance: {fileID: 1918599243}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &774095242 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8511924937620905978, guid: 2fe7901cea5c74441b21c648d89d346a, type: 3}
@@ -10575,6 +10585,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3048953396058960980, guid: b2f42c13fdef0884da7413d379394f2f, type: 3}
   m_PrefabInstance: {fileID: 2028053486}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &979466375 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6407532311664236116, guid: 5797518ee58474847bb6390d60132494, type: 3}
+  m_PrefabInstance: {fileID: 319120367}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &989433501 stripped
 GameObject:
@@ -12504,6 +12519,11 @@ CanvasRenderer:
 Transform:
   m_CorrespondingSourceObject: {fileID: 591559820437706024, guid: 6c51e92d14a86ee42b41d2a03f1a63bc, type: 3}
   m_PrefabInstance: {fileID: 1394835512}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1329245273 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6407532311664236116, guid: 5797518ee58474847bb6390d60132494, type: 3}
+  m_PrefabInstance: {fileID: 787743501}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1332499928
 GameObject:
@@ -14620,6 +14640,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 267357843}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1678372387 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6407532311664236116, guid: 5797518ee58474847bb6390d60132494, type: 3}
+  m_PrefabInstance: {fileID: 852639871}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1683447714
 GameObject:
   m_ObjectHideFlags: 0
@@ -16341,6 +16366,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.014838708, y: 0.0015065353, z: 0.00033624296}
   m_Center: {x: -0.003198105, y: -0.0000433359, z: -0.0004076083}
+--- !u!1 &2010344273 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6407532311664236116, guid: 5797518ee58474847bb6390d60132494, type: 3}
+  m_PrefabInstance: {fileID: 175132869}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2022057154
 GameObject:
   m_ObjectHideFlags: 0
@@ -16855,28 +16885,42 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e141b63087a8ea1438592b8635238963, type: 3}
   - {fileID: 8300000, guid: e0a02c4b00125814a91f17387c895edf, type: 3}
   - {fileID: 8300000, guid: 38369c54a037cae41ae54fed6b503a5c, type: 3}
-  firstRowLights:
-  - {fileID: 3853898351809611466}
-  - {fileID: 3853898351722073024}
-  secondRowLights:
-  - {fileID: 175132871}
-  - {fileID: 3923666203142078251}
-  - {fileID: 852639873}
-  thirdRowLights:
-  - {fileID: 319120369}
-  - {fileID: 787743503}
-  - {fileID: 319120369}
-  firstRowVolumetricLights:
-  - {fileID: 308661073996004501}
-  - {fileID: 308661074361414047}
-  secondRowVolumetricLights:
-  - {fileID: 175132872}
-  - {fileID: 522681589300970868}
-  - {fileID: 852639874}
-  thirdRowVolumetricLights:
-  - {fileID: 989433501}
-  - {fileID: 1462124205}
-  - {fileID: 1918599245}
+  lightRows:
+  - pointLights:
+    - {fileID: 3853898351809611466}
+    - {fileID: 3853898351722073024}
+    volumetricLights:
+    - {fileID: 308661073996004501}
+    - {fileID: 308661074361414047}
+    materialObjects:
+    - {fileID: 6407532310370701318}
+    - {fileID: 6407532310474988812}
+  - pointLights:
+    - {fileID: 175132871}
+    - {fileID: 3923666203142078251}
+    - {fileID: 852639873}
+    volumetricLights:
+    - {fileID: 175132872}
+    - {fileID: 522681589300970868}
+    - {fileID: 852639874}
+    materialObjects:
+    - {fileID: 2010344273}
+    - {fileID: 6621493280000813543}
+    - {fileID: 1678372387}
+  - pointLights:
+    - {fileID: 319120369}
+    - {fileID: 787743503}
+    - {fileID: 361792084}
+    volumetricLights:
+    - {fileID: 989433501}
+    - {fileID: 1462124205}
+    - {fileID: 1918599245}
+    materialObjects:
+    - {fileID: 979466375}
+    - {fileID: 1329245273}
+    - {fileID: 757200712}
+  onLampMaterial: {fileID: 2100000, guid: d76bb48d36b2a6e4781944e4e0c49f9c, type: 2}
+  offLampMaterial: {fileID: 2100000, guid: 874b34b7434980f4d97c522d3d1ac7d9, type: 2}
   deskLampLight: {fileID: 834862756}
   deskLampSpotLight: {fileID: 1336864608}
   deskVolumetricLight: {fileID: 1318009433}
