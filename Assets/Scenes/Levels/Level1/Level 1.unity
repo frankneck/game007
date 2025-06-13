@@ -1001,6 +1001,34 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 111815293}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &127395038 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7905869999555653129, guid: 33d109d71b922c049a404fec7ecdf400, type: 3}
+  m_PrefabInstance: {fileID: 4631373918538769051}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &127395051
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127395038}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 0.05
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &130714018
 GameObject:
   m_ObjectHideFlags: 0
@@ -14354,8 +14382,8 @@ Transform:
   m_GameObject: {fileID: 1653369264}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0.000019718675, y: 0.0011699608, z: 0.00026679906}
-  m_LocalScale: {x: 0.020599969, y: 0.0001594823, z: 0.036335662}
+  m_LocalPosition: {x: -0.000019718675, y: 0.0138, z: 0.00027}
+  m_LocalScale: {x: 0.020599969, y: 0.0001594823, z: 0.010666309}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1853213106}
@@ -18606,6 +18634,10 @@ PrefabInstance:
     - target: {fileID: 2648011346747524015, guid: 5ad37aa0d675ff040a1dd43c2eda6d63, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2688724931828304397, guid: 5ad37aa0d675ff040a1dd43c2eda6d63, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -25471,7 +25503,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 748418936}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e3d3f7d4108a1fa468bd0247bab527a6, type: 3}
   m_Name: 
@@ -26884,6 +26916,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7905869999555653129, guid: 33d109d71b922c049a404fec7ecdf400, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 127395051}
     - targetCorrespondingSourceObject: {fileID: 4187531530145002299, guid: 33d109d71b922c049a404fec7ecdf400, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1107647381}
