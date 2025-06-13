@@ -18,6 +18,7 @@ public class GameBehaviour : Sounds
     [SerializeField] private TextMeshProUGUI currentScore;
     [SerializeField] private TextMeshProUGUI playerUI;
     [SerializeField] private int highScore;
+    [SerializeField] public MonoBehaviour[] scriptsToToggle;
     public string labelText = "Попади во все цели за определнное время";
     public float gameDuration = 10f;
     private float timeRemaining;
@@ -112,7 +113,7 @@ public class GameBehaviour : Sounds
                     highScore = _itemsCollected;
                     score.text = $"Рекорд: {highScore}";
                     Debug.Log("Новый рекорд!");
-                    playSteps?.PlayStepIndex(0);
+                    playSteps?.PlayStepIndex(1); // октрытие двери
                 }
 
                 StartCoroutine(ResetPlayerUI(1f));
@@ -153,5 +154,17 @@ public class GameBehaviour : Sounds
     {
         yield return new WaitForSeconds(delay);
         playerUI.text = "";
+    }
+
+        public void DisableScripts()
+    {
+        foreach (var script in scriptsToToggle)
+            if (script != null) script.enabled = false;
+    }
+
+    public void EnableScripts()
+    {
+        foreach (var script in scriptsToToggle)
+            if (script != null) script.enabled = true;
     }
 }

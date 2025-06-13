@@ -751,6 +751,9 @@ MonoBehaviour:
   currentScore: {fileID: 1638347170}
   playerUI: {fileID: 1308117444}
   highScore: 10
+  scriptsToToggle:
+  - {fileID: 5205833706399958960}
+  - {fileID: 226333998}
   labelText: "\u041F\u043E\u043F\u0430\u0434\u0438 \u0432\u043E \u0432\u0441\u0435
     \u043C\u0438\u0448\u0435\u043D\u0438!"
   gameDuration: 10
@@ -6452,7 +6455,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8698818838098262314, guid: d69d1b462f51a2c4a8358ce041c996a7, type: 3}
       propertyPath: m_OnOne.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8698818838098262314, guid: d69d1b462f51a2c4a8358ce041c996a7, type: 3}
       propertyPath: m_OnZero.m_PersistentCalls.m_Calls.Array.size
@@ -6465,6 +6468,10 @@ PrefabInstance:
     - target: {fileID: 8698818838098262314, guid: d69d1b462f51a2c4a8358ce041c996a7, type: 3}
       propertyPath: m_OnOne.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8698818838098262314, guid: d69d1b462f51a2c4a8358ce041c996a7, type: 3}
+      propertyPath: m_OnOne.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8698818838098262314, guid: d69d1b462f51a2c4a8358ce041c996a7, type: 3}
       propertyPath: m_OnZero.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -6483,6 +6490,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 429669004}
     - target: {fileID: 8698818838098262314, guid: d69d1b462f51a2c4a8358ce041c996a7, type: 3}
+      propertyPath: m_OnOne.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 48288253}
+    - target: {fileID: 8698818838098262314, guid: d69d1b462f51a2c4a8358ce041c996a7, type: 3}
       propertyPath: m_OnZero.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2111986227}
@@ -6495,12 +6506,20 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8698818838098262314, guid: d69d1b462f51a2c4a8358ce041c996a7, type: 3}
+      propertyPath: m_OnOne.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8698818838098262314, guid: d69d1b462f51a2c4a8358ce041c996a7, type: 3}
       propertyPath: m_OnOne.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: TogglePower
       objectReference: {fileID: 0}
     - target: {fileID: 8698818838098262314, guid: d69d1b462f51a2c4a8358ce041c996a7, type: 3}
       propertyPath: m_OnOne.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: set_material
+      objectReference: {fileID: 0}
+    - target: {fileID: 8698818838098262314, guid: d69d1b462f51a2c4a8358ce041c996a7, type: 3}
+      propertyPath: m_OnOne.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: EnableScripts
       objectReference: {fileID: 0}
     - target: {fileID: 8698818838098262314, guid: d69d1b462f51a2c4a8358ce041c996a7, type: 3}
       propertyPath: m_OnZero.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
@@ -6521,6 +6540,10 @@ PrefabInstance:
     - target: {fileID: 8698818838098262314, guid: d69d1b462f51a2c4a8358ce041c996a7, type: 3}
       propertyPath: m_OnOne.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: UnityEngine.Renderer, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8698818838098262314, guid: d69d1b462f51a2c4a8358ce041c996a7, type: 3}
+      propertyPath: m_OnOne.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: GameBehaviour, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8698818838098262314, guid: d69d1b462f51a2c4a8358ce041c996a7, type: 3}
       propertyPath: m_OnZero.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -6553,6 +6576,10 @@ PrefabInstance:
     - target: {fileID: 8698818838098262314, guid: d69d1b462f51a2c4a8358ce041c996a7, type: 3}
       propertyPath: m_OnOne.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Material, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8698818838098262314, guid: d69d1b462f51a2c4a8358ce041c996a7, type: 3}
+      propertyPath: m_OnOne.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8698818838098262314, guid: d69d1b462f51a2c4a8358ce041c996a7, type: 3}
       propertyPath: m_OnZero.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -7580,6 +7607,10 @@ PlayableDirector:
     value: {fileID: 360228953}
   - key: {fileID: 8069596432174834772, guid: 5affe6fd4a751314fba0a5bae6bc3960, type: 2}
     value: {fileID: 353043564}
+  - key: {fileID: -5217632901527320524, guid: 98884506d6178854d96e9d662077f55b, type: 2}
+    value: {fileID: 360228953}
+  - key: {fileID: 8811806018837175703, guid: 98884506d6178854d96e9d662077f55b, type: 2}
+    value: {fileID: 353043564}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &360228952
@@ -7614,6 +7645,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 0b158a511400dc0468d3f34fd83bae44, type: 2}
     - {fileID: 11400000, guid: b127a5e62c0fd414887e50064933e8a4, type: 2}
     - {fileID: 11400000, guid: 3411a0a12c689a947b6741506d125e9f, type: 2}
+    - {fileID: 11400000, guid: 661e430e63b0efd47af654a933bbdd54, type: 2}
+    - {fileID: 11400000, guid: b0c36d2921e438144bbf0b58ae7c3e3e, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
@@ -7657,6 +7690,34 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 48288253}
+          m_TargetAssemblyTypeName: GameBehaviour, Assembly-CSharp
+          m_MethodName: EnableScripts
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 48288253}
+          m_TargetAssemblyTypeName: GameBehaviour, Assembly-CSharp
+          m_MethodName: DisableScripts
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &360228954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7670,14 +7731,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   steps:
+  - name: Turn on light
+    time: 0.5
+    hasPlayed: 0
   - name: Open the door
-    time: 0.2
-    hasPlayed: 0
-  - name: Reaching a new score
-    time: 0
-    hasPlayed: 0
-  - name: Reading the text
-    time: 0
+    time: 0.5
     hasPlayed: 0
 --- !u!1 &366372526
 GameObject:

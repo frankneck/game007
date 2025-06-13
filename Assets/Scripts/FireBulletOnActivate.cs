@@ -33,12 +33,26 @@ public class FireBulletOnActivate : Sounds
     private bool isEmpty;
     private bool storageDetached;
     private RaycastHit hit;
+    private XRGrabInteractable grabable;
 
     void Start()
     {
-        XRGrabInteractable grabable = GetComponent<XRGrabInteractable>();
-        grabable.activated.AddListener(FireBullet);
         currentAmmo = 10; // для тестов
+    }
+
+    void Awake()
+    {
+        grabable = GetComponent<XRGrabInteractable>();
+    }
+
+    void OnEnable()
+    {
+        grabable.activated.AddListener(FireBullet);
+    }
+
+    void OnDisable()
+    {
+        grabable.activated.RemoveListener(FireBullet);
     }
 
     void Update()
