@@ -7,10 +7,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using UnityEngine.Playables;
 using Random = System.Random; // использую Random System
 
 public class GameBehaviour : Sounds
 {
+    [SerializeField] private PlaySteps playSteps;
     [SerializeField] private TargetAndColliderController[] targetControllers;
     [SerializeField] private TextMeshProUGUI score;
     [SerializeField] private TextMeshProUGUI currentScore;
@@ -109,11 +111,14 @@ public class GameBehaviour : Sounds
                 {
                     highScore = _itemsCollected;
                     score.text = $"Рекорд: {highScore}";
+                    Debug.Log("Новый рекорд!");
+                    playSteps?.PlayStepIndex(0);
                 }
 
                 StartCoroutine(ResetPlayerUI(1f));
                 ResetAllTargets();
-                PlaySound(sounds[0], volume: 0.6f, p1: 0.8f, p2: 0.9f); // звук завершения игры 
+                PlaySound(sounds[0], volume: 0.3f, p1: 0.8f, p2: 0.9f); // звук завершения игры 
+                // PlaySound(sounds[0], volume: 0.6f, p1: 1.5f, p2: 1.5f); // +50% скорость
             }
         }
     }

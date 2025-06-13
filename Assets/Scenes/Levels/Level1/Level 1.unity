@@ -740,6 +740,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - {fileID: 8300000, guid: dc19dc5f643bfd84f948140821cc1b6f, type: 3}
+  playSteps: {fileID: 360228954}
   targetControllers:
   - {fileID: 1050576640}
   - {fileID: 185355797}
@@ -7355,6 +7356,7 @@ GameObject:
   - component: {fileID: 353043564}
   - component: {fileID: 353043563}
   - component: {fileID: 353043565}
+  - component: {fileID: 353043566}
   m_Layer: 0
   m_Name: Door Pivot
   m_TagString: Untagged
@@ -7390,6 +7392,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c4422f1e8fe6a6479197cd13f814f96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sounds:
+  - {fileID: 8300000, guid: f75a40ed3c785c34d9cb5c853d1f389a, type: 3}
   animator: {fileID: 353043564}
 --- !u!95 &353043564
 Animator:
@@ -7442,6 +7446,102 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!82 &353043566
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353043561}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &360228950
 GameObject:
   m_ObjectHideFlags: 0
@@ -7490,12 +7590,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 360228950}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1847175611}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &360228953
 MonoBehaviour:
@@ -7570,8 +7670,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   steps:
-  - name: Switchin on the light
-    time: 0
+  - name: Open the door
+    time: 0.2
     hasPlayed: 0
   - name: Reaching a new score
     time: 0
@@ -15465,6 +15565,7 @@ Transform:
   - {fileID: 48288251}
   - {fileID: 429043139}
   - {fileID: 1519434757}
+  - {fileID: 360228952}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1849854448
@@ -20451,19 +20552,6 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.00009485427, y: 0.005114378, z: 0.0007166972}
     m_Extent: {x: 0.008213798, y: 0.004280126, z: 0.0015724876}
   m_DirtyAABB: 0
---- !u!114 &1561745479040550942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3904598738202888831}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c4422f1e8fe6a6479197cd13f814f96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 0}
 --- !u!1 &1566279815559368191
 GameObject:
   m_ObjectHideFlags: 0
@@ -24920,7 +25008,6 @@ GameObject:
   - component: {fileID: 799367121416672651}
   - component: {fileID: 3541707900939192281}
   - component: {fileID: 5025506337407309757}
-  - component: {fileID: 1561745479040550942}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -37840,7 +37927,6 @@ SceneRoots:
   - {fileID: 1352125251}
   - {fileID: 839060458}
   - {fileID: 1615479465}
-  - {fileID: 360228952}
   - {fileID: 1847175611}
   - {fileID: 1662484146}
   - {fileID: 1712369928}
