@@ -1,16 +1,15 @@
 using System.Collections;
-using TMPro;
 using UnityEngine;
 
 public class KeyController : MonoBehaviour
 {
-    public AudioSource tickAudioSource;
-    public AudioSource hornAudioSource;
-    public GameBehaviour gameBehaviour;
-    [SerializeField] private TextMeshProUGUI playerUI;
+    public GameController gameController;
+    public UIManager uiManager;
+    public TargetManager targetManager;
+
     [SerializeField] private float tickInterval = 1f;
-    [SerializeField] private TargetAndColliderController[] targetControllers;
     [SerializeField] private float pressDistance = 0.07f;
+
     private Vector3 initialPosition;
     private bool isPressed;
     private Rigidbody rb;
@@ -21,7 +20,7 @@ public class KeyController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         initialPosition = transform.position;
 
-        playerUI.text = "";
+        uiManager?.ClearMessage(0f);
     }
 
     private void Update()
@@ -31,32 +30,24 @@ public class KeyController : MonoBehaviour
         if (rb != null)
         {
             if (rb.velocity.magnitude > 5f)
-            {
                 rb.velocity = Vector3.ClampMagnitude(rb.velocity, 5f);
-            }
 
-            if (transform.position.y < initialPosition.y - pressDistance - 0.01f)
-            {
-                transform.position = new Vector3(transform.position.x, initialPosition.y - pressDistance, transform.position.z);
-                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-            }
+            float minY = initialPosition.y - pressDistance;
+            float maxY = initialPosition.y;
 
-            if (transform.position.y > initialPosition.y + 0.01f)
+            if (transform.position.y < minY - 0.01f || transform.position.y > maxY + 0.01f)
             {
-                transform.position = new Vector3(transform.position.x, initialPosition.y, transform.position.z);
+                float clampedY = Mathf.Clamp(transform.position.y, minY, maxY);
+                transform.position = new Vector3(transform.position.x, clampedY, transform.position.z);
                 rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             }
         }
 
         if (currentDistance >= pressDistance && !isPressed && !ignoreUpdate)
-        {
             Press();
-        }
 
         if (currentDistance < pressDistance * 0.5f && isPressed)
-        {
             isPressed = false;
-        }
     }
 
     public void Press()
@@ -69,40 +60,7 @@ public class KeyController : MonoBehaviour
         transform.position = new Vector3(transform.position.x, initialPosition.y - pressDistance, transform.position.z);
         rb.velocity = Vector3.zero;
 
-        StartCoroutine(DelayedTrigger(4f));
-    }
-
-    private IEnumerator DelayedTrigger(float delay)
-    {
-        float elapsed = 0f;
-        int count = 3;
-
-        while (elapsed < delay)
-        {
-            if (elapsed < 3f) // первые 3 секунды – тик
-            {
-                if (tickAudioSource != null)
-                {
-                    playerUI.text = $"{count--}...";
-                    tickAudioSource.Play();
-                }
-            }
-            else if (Mathf.Approximately(elapsed, 3f)) // на 4-й секунде – гудок
-            {
-                if (tickAudioSource != null)
-                {
-                    playerUI.text = $"Начали!";
-                    hornAudioSource.Play();
-                }
-            }
-
-            yield return new WaitForSeconds(tickInterval);
-            elapsed += tickInterval;
-        }
-
-        targetControllers[0]?.MoveDown();
-        gameBehaviour?.StartGame();
-
+        gameController.PrepareGame();
         isPressed = true;
         ignoreUpdate = false;
     }

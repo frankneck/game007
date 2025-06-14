@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorBehaviour : Sounds
+public class DoorController : MonoBehaviour
 {
     [SerializeField] private Animator animator;
 
     public void OpenDoor()
     {
-        PlaySound(sounds[0]); // звук скрипа двери
-        StartCoroutine(DelayedOpening(sounds[0].length / 2));
+        AudioManager.instance.PlayOneShot("DoorOpened", transform.position); // звук скрипа двери
+
+        float length = AudioManager.instance.GetClipLength("DoorOpened");
+        StartCoroutine(DelayedOpening(length / 2));
     }
 
     private IEnumerator DelayedOpening(float delay)

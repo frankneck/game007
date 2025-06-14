@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LightingBehaviour : Sounds
+public class LightManager : MonoBehaviour
 {
     [Serializable]
     public class LightGroupRow
@@ -20,8 +20,7 @@ public class LightingBehaviour : Sounds
 
     [Header("Ряды света")]
     [Tooltip("Список рядов с точечными и объемными источниками и материалами")]
-    [SerializeField]
-    private List<LightGroupRow> lightRows = new List<LightGroupRow>();
+    [SerializeField] private List<LightGroupRow> lightRows = new List<LightGroupRow>();
 
     [Header("Материалы для ламп")]
     [SerializeField] private Material onLampMaterial;
@@ -42,6 +41,7 @@ public class LightingBehaviour : Sounds
     [SerializeField] private float delayBetweenSteps = 0.5f;
 
     private bool powerIsOn = false;
+    private Vector3 rowCenterPosition;
 
     void Start()
     {
@@ -83,10 +83,8 @@ public class LightingBehaviour : Sounds
         {
             powerIsOn = true;
             indicatorLight.SetColorOne(); // Зеленый индикатор
-            if (sounds.Length > 0)
-                PlaySound(sounds[0]); // звук переключателя
-            else
-                Debug.LogWarning("Отсутсвует клип");
+            AudioManager.instance.PlayOneShot("TurnOn", indicatorLight.transform.position); // звук переключателя
+
             StartCoroutine(TurnOnLightsSequence());
         }
         else
@@ -95,8 +93,10 @@ public class LightingBehaviour : Sounds
             StopAllCoroutines();
             TurnOffAllLights();
             indicatorLight.SetColorZero(); // Красный индикатор
-            PlaySound(sounds[0]); // звук переключателя
-            PlaySound(sounds[3]); // звук выключения света
+            AudioManager.instance.PlayOneShot("TurnOff", indicatorLight.transform.position); // звук переключателя
+
+            // if (rowCenterPosition != null)
+            AudioManager.instance.PlayOneShot("TurnOffAllLights", rowCenterPosition); // звук выключения всего света
         }
     }
 
@@ -120,17 +120,15 @@ public class LightingBehaviour : Sounds
                     renderer.material = onLampMaterial;
             }
 
-            if (sounds.Length > 0)
-                PlaySound(sounds[1], volume: 0.5f, p1: 0.9f, p2: 1f);
-            else
-                Debug.LogWarning("Отсутсвует клип");
+            rowCenterPosition = GetRowCenter(row); // записываем позицию при включении
+            AudioManager.instance.PlayOneShot("TurnOnRow", rowCenterPosition, pitchMin: 0.9f, pitchMax: 1f, volume: 1f); // звук выключения ряда источников света
 
             yield return new WaitForSeconds(delayBetweenSteps);
         }
 
         if (deskLampLight != null)
         {
-            PlaySound(sounds[4]); // звук включения настольной лампы
+            AudioManager.instance.PlayOneShot("TurnOnTableLamp", deskLampLight.transform.position); // звук включения настольной лампы
             deskLampLight.enabled = true;
             deskLampSpotLight.enabled = true;
             deskVolumetricLight.SetActive(true);
@@ -140,8 +138,30 @@ public class LightingBehaviour : Sounds
 
         if (pcInterface != null)
         {
-            PlaySound(sounds[2]); // звук включения компьютера
+            AudioManager.instance.PlayOneShot("TurnOnPC", pcInterface.transform.position); // звук включения компьютера
             pcInterface.gameObject.SetActive(true);
         }
+    }
+    
+    Vector3 GetRowCenter(LightGroupRow row)
+    {
+        List<Vector3> positions = new();
+
+        foreach (var light in row.pointLights)
+            if (light != null)
+                positions.Add(light.transform.position);
+
+        foreach (var obj in row.materialObjects)
+            if (obj != null)
+                positions.Add(obj.transform.position);
+
+        if (positions.Count == 0)
+            return Vector3.zero;
+
+        Vector3 sum = Vector3.zero;
+        foreach (var pos in positions)
+            sum += pos;
+
+        return sum / positions.Count;
     }
 }
