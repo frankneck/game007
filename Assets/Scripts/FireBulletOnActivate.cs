@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
-public class FireBulletOnActivate : Sounds
+public class FireBulletOnActivate : MonoBehaviour
 {
     [Header("Настройки пули")]
     public GameObject bullet;
@@ -77,8 +77,9 @@ public class FireBulletOnActivate : Sounds
         {
             if (animator != null)
             {
-                PlaySound(sounds[2]); // сухой выстрел
+                AudioManager.instance.PlayOneShot("DryFire", transform.position); // сухой выстрел
                 animator.SetTrigger("EMPTY");
+                return;
             }
         }
         else
@@ -86,7 +87,7 @@ public class FireBulletOnActivate : Sounds
             if (animator != null)
             {
                 muzzleFlash.Play();
-                PlaySound(sounds[0]); // выстрел
+                AudioManager.instance.PlayOneShot("Shot", transform.position); // выстрел
                 animator.SetTrigger("SHOT");
                 GameObject spawnedBullet = Instantiate(bullet);
                 spawnedBullet.transform.position = spawnPoint.position;
@@ -103,8 +104,6 @@ public class FireBulletOnActivate : Sounds
                 Instantiate(impactParticleSystem, hit.point, Quaternion.LookRotation(hit.normal));
             }
         }
-
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -121,7 +120,7 @@ public class FireBulletOnActivate : Sounds
     {
         if (animator != null)
         {
-            PlaySound(sounds[1]); // сухой выстрел
+            AudioManager.instance.PlayOneShot("Reloading", transform.position);
             animator.SetTrigger("RELOADED");
             storage.SetActive(true);
         }
@@ -133,7 +132,7 @@ public class FireBulletOnActivate : Sounds
 
     public void StorageDetach()
     {
-        PlaySound(sounds[3]); // звук вытаскивания
+        AudioManager.instance.PlayOneShot("StorageFall", transform.position); // звук вытаскивания
         isEmpty = true;
         currentAmmo = 0;
         animator.SetTrigger("StorageTakeOut");
@@ -162,7 +161,7 @@ public class FireBulletOnActivate : Sounds
         yield return new WaitForSeconds(delayOfShellFalling);
 
         muzzleFlash.Stop();
-        PlaySound(sounds[4]); // звук падения гильзы
+        AudioManager.instance.PlayOneShot("BulletShellFalling", transform.position); // звук падения гильзы
     }
 }
 

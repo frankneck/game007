@@ -32,6 +32,7 @@ public class AudioManager : MonoBehaviour
 
     void Awake()
     {
+        // Реализация Singletone
         if (instance == null)
             instance = this;
         else
@@ -44,7 +45,7 @@ public class AudioManager : MonoBehaviour
 
         foreach (Sound s in sounds)
         {
-            if(!s.source)
+            if (!s.source)
                 s.source = gameObject.AddComponent<AudioSource>();
 
             s.source.clip = s.clip;
@@ -67,10 +68,29 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
     }
 
+    public void PlayOneShot(string name, Vector3 position, float pitchMin = 0.9f, float pitchMax = 1.1f, float volume = 1f)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+
+        if (s == null)
+        {
+            Debug.LogWarning("Sound: " + name + " not found");
+            return;
+        }
+
+        AudioSource.PlayClipAtPoint(s.clip, position, volume);
+    }
+
     public void Stop(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
 
         s.source.Stop();
+    }
+
+    public float GetClipLength(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        return s != null && s.clip != null ? s.clip.length : 0f;
     }
 }
